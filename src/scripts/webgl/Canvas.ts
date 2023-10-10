@@ -21,9 +21,6 @@ export class Canvas {
     three.controls.dampingFactor = 0.1
     three.controls.enableDamping = true
     three.controls.enablePan = false
-
-    const axes = new THREE.AxesHelper(0.5)
-    three.scene.add(axes)
   }
 
   private createScreen() {

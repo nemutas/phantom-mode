@@ -11,7 +11,6 @@ varying vec2 vUv;
 const int MAX_STEPS = 100;
 
 #include './modules/primitives.glsl'
-#include './modules/combinations.glsl'
 
 float sdf(vec3 p) {
   float div = 5.0;
@@ -32,8 +31,6 @@ float sdf(vec3 p) {
 
   return final;
 }
-
-#include './modules/normal.glsl'
 
 float rayMarch(vec3 ro, vec3 rd) {
   float accum = 0.0;
