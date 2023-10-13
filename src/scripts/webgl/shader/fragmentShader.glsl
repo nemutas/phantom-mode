@@ -49,17 +49,15 @@ float rayMarch(vec3 ro, vec3 rd) {
 }
 
 void main() {
+  vec3 ro = uCameraPosition;
   vec2 p = vUv * 2.0 - 1.0;
-
   vec4 ndcRay = vec4(p, 1.0, 1.0);
-
   vec2 lensRay = ndcRay.xy * vec2(uAspect, 1.0);
-  ndcRay.xy += normalize(lensRay) * pow(length(lensRay), 4.0) * 0.08;
+  ndcRay.xy += normalize(lensRay) * pow(length(lensRay), 3.5) * 0.08;
+  vec4 target = uViewMatrixInverse * uProjectionMatrixInverse * ndcRay;
+  vec3 ray = normalize(target.xyz / target.w - ro);
 
-  vec3 ray = (uViewMatrixInverse * uProjectionMatrixInverse * ndcRay).xyz;
-  ray = normalize(ray);
-
-  float color = rayMarch(uCameraPosition, ray);
+  float color = rayMarch(ro, ray);
   color *= 0.01;
   color = smoothstep(0.05, 1.2, color);
 
